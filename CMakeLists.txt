@@ -1,8 +1,13 @@
+cmake_minimum_required(VERSION 2.8)
+
 include_directories(if inc)
 
-set(FSM_HEADERS inc/MainWindow.h inc/HelpViewer.h inc/DocumentEditor.h
-           inc/ViewStructureWidget.h inc/Menu.h)
-set(FSM src/main.cpp src/MainWindow.cpp src/HelpViewer.cpp src/DocumentEditor.cpp 
-           src/ViewStructureWidget.cpp src/Menu.cpp)
-QT4_WRAP_CPP(structureddocument_HEADERS_MOC ${FSM})
+set(FSM_HEADERS if/FSM.h if/Transition.h if/State.h)
+set(FSM_FILES src/FSM.cpp src/State.cpp src/Transition.cpp)
 
+add_library(FSM SHARED ${FSM_FILES})
+add_library(FSMStatic STATIC ${FSM_FILES})
+
+set_target_properties(FSMStatic PROPERTIES OUTPUT_NAME FSM)
+
+include_directories(tests)
