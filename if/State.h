@@ -3,30 +3,30 @@
 #define FSM_STATE_H
 #include <string>
 #include <functional>
+#include "Base.h"
 
 
 namespace FSM
 {
   class Transition;
   
-  class State
+  class State:public Base
   {
   public:
     State();
+    State(std::string p_name);
     ~State();
     
-    const std::string & getName() {return m_name;};
     
     virtual void f_in(Transition * p_from);
     virtual void f_out(Transition * p_to);
     
-    void setInFunction(const std::function<void(Transition*)> p_in);
-    void setOutFunction(const std::function<void(Transition*)> p_out);
+    void setInFunction( std::function<void(Transition*,State*)> p_in);
+    void setOutFunction( std::function<void(Transition*,State*)> p_out);
     
   private:
-    std::string m_name;
-    std::function<void(Transition *)> m_in;
-    std::function<void(Transition *)> m_out;
+    std::function<void(Transition *, State *)> m_in;
+    std::function<void(Transition *, State *)> m_out;
   };
 };
 
