@@ -3,6 +3,7 @@
 #include <list>
 #include "State.h"
 #include "Transition.h"
+#include "Ports.h"
 #include "Base.h"
 
 namespace FSM {
@@ -36,6 +37,7 @@ namespace FSM {
     State m_end;
     std::list<State*> m_states;
     std::list<Transition*> m_transitions;
+    std::list<Port*> m_ports;
     bool m_isRunning;
   };
 };
