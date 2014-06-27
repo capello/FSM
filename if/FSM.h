@@ -3,7 +3,7 @@
 #include <list>
 #include "State.h"
 #include "Transition.h"
-#include "Ports.h"
+#include "Port.h"
 #include "Base.h"
 
 namespace FSM {
