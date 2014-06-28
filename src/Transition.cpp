@@ -1,6 +1,6 @@
 #include "Transition.h"
 
-FSM::Transition::Transition()
+FSM::Transition::Transition():m_trans(0),m_stateFrom(0),m_stateTo(0)
 {
 }
 
@@ -18,14 +18,14 @@ void FSM::Transition::setToState(State* p_to)
   m_stateTo = p_to;
 }
 
-void FSM::Transition::f_trans(FSM::Transition* p_transition)
+void FSM::Transition::f_trans()
 {
-  if (m_trans) 
-    m_trans(this);
+  if (m_trans!=0)
+    m_trans->run(Action::IN_TRANSITION,this);
   
 }
 
-void FSM::Transition::setTransFunction(const std::function<void(Transition*)> p_trans)
+void FSM::Transition::setTransAction(Action* p_trans)
 {
   m_trans = p_trans;
 }

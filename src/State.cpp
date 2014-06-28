@@ -1,12 +1,12 @@
 #include "State.h"
 
 
-FSM::State::State():Base()
+FSM::State::State():Base(),m_in(0),m_out(0)
 {
 
 }
 
-FSM::State::State(std::string p_name):Base(p_name)
+FSM::State::State(std::string p_name):Base(p_name),m_in(0),m_out(0)
 {
 }
 
@@ -14,24 +14,24 @@ FSM::State::~State()
 {
 }
 
-void FSM::State::f_in(Transition * p_from)
+void FSM::State::doInAction(Transition * p_from)
 {
-  if (m_in) 
-    m_in(p_from,this);
+  if (m_in != 0)
+    m_in->run(Action::ENTERING_STATE,this);
 }
 
-void FSM::State::f_out(Transition * p_to)
+void FSM::State::doOutAction(Transition * p_to)
 {
-  if (m_out)
-    m_out(p_to,this);
+  if (m_out != 0)
+    m_out->run(Action::EXITING_STATE,this);
 }
 
-void FSM::State::setInFunction(const std::function<void(Transition*,State*)> p_in)
+void FSM::State::setInAction(Action * p_in)
 {
   m_in = p_in;
 }
 
-void FSM::State::setOutFunction(std::function< void(Transition*,State*) > p_out)
+void FSM::State::setOutAction(Action * p_out)
 {
   m_out = p_out;
 }

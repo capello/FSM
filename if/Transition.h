@@ -3,6 +3,7 @@
 
 #include "State.h"
 #include "Base.h"
+#include "Action.h"
 #include <functional>
 
 namespace FSM {
@@ -16,13 +17,13 @@ namespace FSM {
     
     State * getFromState(){ return m_stateFrom;};
     State * getToState() {return m_stateTo;};
-    void f_trans(Transition* p_transition);
-    void setTransFunction(const std::function<void(Transition*)> p_trans);
+    void f_trans();
+    void setTransAction(Action* p_trans);
     
   private:
     State *m_stateFrom;
     State *m_stateTo;
-    std::function<void(Transition *)> m_trans;
+    Action* m_trans;
   };
 };
 

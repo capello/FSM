@@ -4,6 +4,7 @@
 #include <string>
 #include <functional>
 #include "Base.h"
+#include "Action.h"
 
 
 namespace FSM
@@ -18,15 +19,15 @@ namespace FSM
     ~State();
     
     
-    virtual void f_in(Transition * p_from);
-    virtual void f_out(Transition * p_to);
+    virtual void doInAction(Transition * p_from);
+    virtual void doOutAction(Transition * p_to);
     
-    void setInFunction( std::function<void(Transition*,State*)> p_in);
-    void setOutFunction( std::function<void(Transition*,State*)> p_out);
+    void setInAction(Action* p_in);
+    void setOutAction(Action* p_out);
     
   private:
-    std::function<void(Transition *, State *)> m_in;
-    std::function<void(Transition *, State *)> m_out;
+    Action* m_in;
+    Action* m_out;
   };
 };
 

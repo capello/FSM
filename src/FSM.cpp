@@ -46,9 +46,9 @@ void FSM::Machine::step(FSM::Transition* p_transition)
 {
   if (p_transition->getFromState() == m_current)
   {
-    p_transition->getFromState()->f_out(p_transition);
-    p_transition->f_trans(p_transition);
-    p_transition->getToState()->f_in(p_transition);
+    p_transition->getFromState()->doOutAction(p_transition);
+    p_transition->f_trans();
+    p_transition->getToState()->doInAction(p_transition);
     m_current = p_transition->getToState();
   }
 }
