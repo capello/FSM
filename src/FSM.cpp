@@ -1,9 +1,23 @@
 #include "FSM.h"
+#include "State.h"
+#include "Port.h"
+#include "Transition.h"
 
-FSM::Machine::Machine():m_start("start"),m_end("end"),m_isRunning(false),m_transitions(),m_states()
+FSM::Machine::Machine():Base(),m_isRunning(false),m_transitions(),m_states()
 {
-  m_states.push_back(&m_start);
-  m_states.push_back(&m_end);
+  m_start = new State(this,"start");
+  m_end = new State(this,"end");
+  m_states.push_back(m_start);
+  m_states.push_back(m_end);
+}
+
+FSM::Machine::Machine(std::string p_name):Base(p_name),m_isRunning(false),m_transitions(),m_states()
+{
+  m_start = new State(this,"start");
+  m_end = new State(this,"end");
+  m_states.push_back(m_start);
+  m_states.push_back(m_end);
+  
 }
 
 FSM::Machine::~Machine()
@@ -30,7 +44,7 @@ void FSM::Machine::start()
   if (!m_isRunning)
   {
     m_isRunning = true;
-    m_current = &m_start;
+    m_current = m_start;
   }
 }
 

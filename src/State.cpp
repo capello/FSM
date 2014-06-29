@@ -1,12 +1,12 @@
 #include "State.h"
 
 
-FSM::State::State():Base(),m_in(0),m_out(0)
+FSM::State::State(Machine* p_machine):Base(),m_machine(p_machine),m_in(0),m_out(0)
 {
 
 }
 
-FSM::State::State(std::string p_name):Base(p_name),m_in(0),m_out(0)
+FSM::State::State(Machine* p_machine,std::string p_name):Base(p_name),m_machine(p_machine),m_in(0),m_out(0)
 {
 }
 

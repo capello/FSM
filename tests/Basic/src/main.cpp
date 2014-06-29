@@ -2,6 +2,7 @@
 #include "FSM.h"
 #include <Action.h>
 #include <State.h>
+#include "Transition.h"
 // Test Basic FSM.
 // Define a basic FSM.
 // Start -> New -> Aproved -> Closed -> endl
@@ -35,7 +36,10 @@ void whereAmIFunction(FSM::Action::When p_when, FSM::Base* p_base)
   switch (p_when)
   {
     case FSM::Action::ENTERING_STATE:
-      std::cout << "Entering " << p_base->getName() << std::endl;
+    {
+      auto * l_state = dynamic_cast<FSM::State*>(p_base);
+      std::cout << "Entering " << p_base->getName() << " state in " << l_state->getMachine()->getName() << " machine.\n";
+    }
       break;
     case FSM::Action::EXITING_STATE:
       std::cout << "Exiting " << p_base->getName() << std::endl;
@@ -52,7 +56,7 @@ void whereAmIFunction(FSM::Action::When p_when, FSM::Base* p_base)
   }
 }
 
-MyFSM::MyFSM()
+MyFSM::MyFSM():New(this),Aproved(this),Closed(this),Abort(this),FSM::Machine("MyFSM")
 {
   addState(&New);
   addState(&Aproved);
